@@ -36,3 +36,59 @@ $ nc 127.0.0.1 12345
 ```
 $ nc -u 127.0.0.1 12345
 ```
+
+## Настройка systemd unit
+
+1. Файл myserver.service нужно скопировать в директорию /etc/systemd/system/
+
+2. Исполняемый файл server нужно скопировать или установить в директорию /usr/local/bin/
+
+3. Перезагрузить systemd, чтобы он увидел новый файл myserver.service:
+```
+# systemctl daemon-reload
+```
+
+4. Добавить в автозагрузку ОС:
+```
+# systemctl enable myserver.service
+```
+
+5. Запустить/остановить/перезапустить myserver.service:
+```
+# systemctl start|stop|restart myserver.service
+```
+
+6. Прверить статус:
+```
+# systemctl status myserver.service
+```
+
+## Создание и установка deb пакета
+
+1. Скомпилировать программу server.
+
+2. Создать отдельную директорию для работы:
+```
+$ mkdir ~/myserver
+```
+
+3. Создать директории:
+```
+$ cd ~/myserver
+$ mkdir -p usr/local/bin/
+$ mkdir DEBIAN/
+```
+
+4. Скопировать исполняемый файл server в директорию ~/myserver/usr/local/bin/
+
+5. Скопировать файл control в директорию ~/myserver/DEBIAN/
+
+6. Собрать deb пакет, находясь на уровень выше, чем myserver:
+```
+$ dpkg-deb --build myserver
+```
+
+7. Установить deb пакет:
+```
+$ sudo dpkg -i myserver.deb
+```

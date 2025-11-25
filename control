@@ -1,0 +1,9 @@
+Package: myserver
+Version: 1.0
+Section: utils
+Priority: optional
+Architecture: amd64
+Depends: libc6
+Maintainer: My Name <my.email@mail.ru>
+Description: My server.
+ My server on epoll with TCP and UDP connection support.
